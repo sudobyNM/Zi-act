@@ -1,3 +1,4 @@
+//flat array children
 function flatArr(arr) {
   let flat = [];
   for (let item of arr) {
@@ -45,22 +46,19 @@ function createDom(fiber) {
   return dom;
 }
 
-// const isEvent = key => key.startsWith("on");
-
+//helper functions
 function isEvent(key) {
   return key.startsWith("on");
 }
-// const isProperty = key => key !== "children" && !isEvent(key);
 
 function isProperty(key) {
   return key !== "children" && !isEvent(key);
 }
-// const newProp = (prev, next) => key => prev[key] !== next[key];
 
 function newProp(prev, next, key) {
   return prev[key] !== next[key];
 }
-// const isGone = (prev, next) => key => !(key in next);
+
 function removedProp(prev, next, key) {
   return !(key in next);
 }
@@ -157,7 +155,7 @@ function workLoop(deadline) {
   let outOfTime = false;
   while (nextWork && !outOfTime) {
     nextWork = performUnitOfWork(nextWork);
-    outOfTime = deadline.timeRemaining() < 1;
+    outOfTime = deadline.timeRemaining() < 1; //out of time
   }
 
   if (!nextWork && rootToRender) {
@@ -264,7 +262,7 @@ function updateChildNodes(parentNode, newElements) {
     }
 
     if (newElement && !isSameType) {
-      // If new element and different type, add a new node
+      // If new element, add a new node
       newChildNode = {
         type: newElement.type,
         props: newElement.props,
@@ -299,18 +297,16 @@ function updateChildNodes(parentNode, newElements) {
   }
 }
 
-const Ract = {
+const Zact = {
   createElement,
   render,
   useState,
 };
 
-const posts = ["post1", "p2", "p4"];
-
-/** @jsx Ract.createElement */
+/** @jsx Zact.createElement */
 
 function ThemeApp() {
-  const [theme, setTheme] = Ract.useState(
+  const [theme, setTheme] = Zact.useState(
     localStorage.getItem("themes") || "light"
   );
 
@@ -318,25 +314,26 @@ function ThemeApp() {
     light: {
       background: "#fff",
       color: "#222",
-
+      border: "1px solid #222",
       transition: "all 0.3s",
     },
     dark: {
       background: "#222",
       color: "#fff",
-
+      border: "1px solid #fff",
       transition: "all 0.3s",
     },
     solarized: {
       background: "#f2ead3",
       color: "#4b595e",
-
+      border: "1px solid #4b595e",
       transition: "all 0.3s",
     },
     catpuccin: {
-      background: "#1e1e2e", // Mocha base
-      color: "#cba6f7",
-      borderRadius: "16px",
+      background:
+        "linear-gradient(to right bottom, #1e2030, #2b3047, #374160, #43537a, #4e6695)",
+      color: "#f2c7e6",
+      border: "1px solid #f5c2e7",
       fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
       transition: "all 0.3s",
     },
@@ -350,19 +347,6 @@ function ThemeApp() {
     let nextTheme = themesName[nextIndex];
     setTheme(nextTheme);
     localStorage.setItem("themes", nextTheme);
-
-    //  let savedTheme
-    //  if(theme === 'light'){
-    //   savedTheme = 'dark'
-    //  }
-    //  else if (theme === 'dark'){
-    //   savedTheme = 'solarized'
-    //  }
-    //  else {
-    //   savedTheme = 'light'
-    //  }
-    //  setTheme(savedTheme)
-    //  localStorage.setItem('theme', savedTheme)
   }
 
   return (
@@ -370,6 +354,7 @@ function ThemeApp() {
       style={{
         minHeight: "100vh",
         ...themes[theme],
+        border: "none",
       }}
     >
       <button
@@ -397,4 +382,4 @@ function ThemeApp() {
 const element = <ThemeApp />;
 
 const container = document.getElementById("root");
-Ract.render(element, container);
+Zact.render(element, container);

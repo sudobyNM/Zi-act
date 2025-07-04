@@ -64,12 +64,12 @@ function createDom(fiber) {
 // const isEvent = key => key.startsWith("on");
 
 function isEvent(key) {
-  return key.startsWith('on');
+  return key.startsWith("on");
 }
 // const isProperty = key => key !== "children" && !isEvent(key);
 
 function isProperty(key) {
-  return key !== 'children' && !isEvent(key);
+  return key !== "children" && !isEvent(key);
 }
 // const newProp = (prev, next) => key => prev[key] !== next[key];
 
@@ -106,7 +106,7 @@ function updateDom(dom, prevProps, nextProps) {
   }).filter(function (key) {
     return newProp(prevProps, nextProps, key);
   }).forEach(function (name) {
-    if (name === 'style' && _typeof(nextProps[name]) === 'object') {
+    if (name === "style" && _typeof(nextProps[name]) === "object") {
       Object.assign(dom.style, nextProps[name]);
     } else {
       dom[name] = nextProps[name];
@@ -220,7 +220,7 @@ function useState(initial) {
     hook.state = action(hook.state);
   });
   var setState = function setState(action) {
-    hook.queue.push(typeof action === 'function' ? action : function () {
+    hook.queue.push(typeof action === "function" ? action : function () {
       return action;
     });
     rootToRender = {
@@ -294,45 +294,42 @@ function updateChildNodes(parentNode, newElements) {
     childIndex++;
   }
 }
-var Ract = {
+var Zact = {
   createElement: createElement,
   render: render,
   useState: useState
 };
-var posts = ['post1', 'p2', 'p4'];
 
-/** @jsx Ract.createElement */
+/** @jsx Zact.createElement */
 
 function ThemeApp() {
-  var _Ract$useState = Ract.useState(localStorage.getItem('themes') || 'light'),
-    _Ract$useState2 = _slicedToArray(_Ract$useState, 2),
-    theme = _Ract$useState2[0],
-    setTheme = _Ract$useState2[1];
+  var _Zact$useState = Zact.useState(localStorage.getItem("themes") || "light"),
+    _Zact$useState2 = _slicedToArray(_Zact$useState, 2),
+    theme = _Zact$useState2[0],
+    setTheme = _Zact$useState2[1];
   var themes = {
     light: {
       background: "#fff",
       color: "#222",
-      boxShadow: 'none',
+      border: "1px solid #222",
       transition: "all 0.3s"
     },
     dark: {
       background: "#222",
       color: "#fff",
-      boxShadow: 'none',
+      border: "1px solid #fff",
       transition: "all 0.3s"
     },
     solarized: {
       background: "#f2ead3",
       color: "#4b595e",
-      boxShadow: 'none',
+      border: "1px solid #4b595e",
       transition: "all 0.3s"
     },
     catpuccin: {
-      background: "#1e1e2e",
-      // Mocha base
-      color: "#cba6f7",
-      boxShadow: "0 2px 16px 0 #a6adc8",
-      borderRadius: "16px",
+      background: "linear-gradient(to right bottom, #1e2030, #2b3047, #374160, #43537a, #4e6695)",
+      color: "#f2c7e6",
+      border: "1px solid #f5c2e7",
       fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
       transition: "all 0.3s"
     }
@@ -343,28 +340,17 @@ function ThemeApp() {
     var nextIndex = (index + 1) % themesName.length;
     var nextTheme = themesName[nextIndex];
     setTheme(nextTheme);
-    localStorage.setItem('themes', nextTheme);
-
-    //  let savedTheme
-    //  if(theme === 'light'){
-    //   savedTheme = 'dark'
-    //  }
-    //  else if (theme === 'dark'){
-    //   savedTheme = 'solarized'
-    //  }
-    //  else {
-    //   savedTheme = 'light'
-    //  }
-    //  setTheme(savedTheme)
-    //  localStorage.setItem('theme', savedTheme)
+    localStorage.setItem("themes", nextTheme);
   }
-  return Ract.createElement("div", {
-    style: _objectSpread({
-      minHeight: "100vh"
-    }, themes[theme])
-  }, Ract.createElement("button", {
+  return Zact.createElement("div", {
     style: _objectSpread(_objectSpread({
-      marginTop: '10rem',
+      minHeight: "100vh"
+    }, themes[theme]), {}, {
+      border: "none"
+    })
+  }, Zact.createElement("button", {
+    style: _objectSpread(_objectSpread({
+      marginTop: "10rem",
       padding: "1rem 2rem",
       fontSize: "1.8rem",
       borderRadius: "8px",
@@ -374,13 +360,13 @@ function ThemeApp() {
       transition: "all 0.3s"
     }),
     onClick: toggleTheme
-  }, "Switch ", theme, " Mode"), Ract.createElement("p", {
+  }, "Switch ", theme, " Mode"), Zact.createElement("p", {
     style: {
-      fontSize: '2rem',
-      marginTop: '2rem'
+      fontSize: "2rem",
+      marginTop: "2rem"
     }
   }, "This UI changes theme using custom React framework!"));
 }
-var element = Ract.createElement(ThemeApp, null);
+var element = Zact.createElement(ThemeApp, null);
 var container = document.getElementById("root");
-Ract.render(element, container);
+Zact.render(element, container);

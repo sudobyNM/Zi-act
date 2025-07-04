@@ -1,0 +1,12 @@
+# Build artifacts
+app.compiled.js
+
+# Node modules
+node_modules/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Environment files
+.env
