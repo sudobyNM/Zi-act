@@ -33,13 +33,11 @@ A lightweight, custom React-like UI frontend library built from scratch in JavaS
 
 # Example: Create a Button Component
 
-```function MyButton() {
-  const [count, setCount] = Ract.useState(0);
-  return (
-    <button onClick={() => setCount(c => c + 1)}>
-      Clicked {count} times
-    </button>
-  );
+```function MyButtonCounter() {
+  /* accepts [val, setVal] state */ = Zact.useState('initialvalue');
+  return (/*
+  calling setVal to update the state for the component
+  */);
 }
 ```
 
