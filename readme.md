@@ -14,7 +14,7 @@ A lightweight, custom React-like UI frontend library built from scratch in JavaS
 
 # How It Works
 
-- JSX is compiled (or interpreted via Babel in-browser) to use the custom Ract.createElement function.
+- JSX is compiled (or interpreted via Babel in-browser) to use the custom Zact.createElement function.
 - Virtual DOM: The framework builds a virtual DOM tree and efficiently updates the real DOM.
 - Hooks: The custom useState hook enables stateful functional components.
 - Themes: Theme styles are managed in a JS object and applied dynamically.
